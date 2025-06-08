@@ -15,9 +15,7 @@ class Cube:
             self.state = state
 
     def apply(self, alg):
-        if isinstance(alg,str):
-            alg = alg.split()
-        assert isinstance(alg,(list,tuple,set))
+        alg = norm_alg(alg)
         for move in alg:
             move = move.strip().replace("'", "i")  # Replace ' with i for inverse moves
             if hasattr(self, move):
@@ -138,7 +136,14 @@ class Cube:
         #cface = self.cube[face]
         # Rotate the face counterclockwise by transposing and then reversing rows
         self.state[face] = [list(row) for row in zip(*self.state[face])][::-1]
+def norm_alg(alg):
+    if isinstance(alg,str):
+        alg = alg.split()
+    assert isinstance(alg, (list,tuple,set))
+    return [move.strip() for move in alg]
 
+def reverse_alg(alg):
+    return [move[0] if "'" in move else move+"'" for move in norm_alg(alg)[::-1]]
 if __name__ == "__main__":
     c = Cube()
     c.Di()
