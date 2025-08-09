@@ -28,7 +28,7 @@ def reverse_algorithm(algorithm:list):
     return [move[0] if "'" in move else move+"'" for move in algorithm[::-1]]
 setup_algorithm = rubik_impl.reverse_alg(ALGORITHM)
 
-cube = rubik_impl.Cube()
+cube = rubik_impl.Cube.solved()
 cube.apply(setup_algorithm)
 cube.apply(random_moves)
 state = convert_to_kociemba(cube)
