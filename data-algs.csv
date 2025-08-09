@@ -1,0 +1,5 @@
+Category,Case,AlgName,Alg,Selected
+PLL,Ua perm,RU,R U' R U R U R U' R' U' R2,1
+PLL,Ua perm,MU,M2 U M U2 M' U M2
+PLL,Ub perm,RU,R2 U R U R' U' R' U' R' U R',1
+PLL,Ub perm,MU,M2 U' M U2 M' U' M2
