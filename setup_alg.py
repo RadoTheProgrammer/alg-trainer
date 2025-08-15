@@ -15,23 +15,18 @@ def convert_to_kociemba(cube):
 
     return cubestring
 
-def get(alg):
-    reversed_alg = rubik_impl.reverse_alg(alg)
-
-    random_moves = []
-    move = None
-    for i in range(N_RANDOM_MOVES):
-        move = random.choice(tuple(MOVES-{move}))
-        random_moves.append(move+("'" if random.randrange(2) else ""))
+def get(input_alg):
+    reversed_alg = rubik_impl.Alg(input_alg).reverse()
     print(reversed_alg)
     cube = rubik_impl.Cube.solved()
     cube.apply(reversed_alg)
-    cube.apply(random_moves)
+    scramble_alg = cube.scramble(N_RANDOM_MOVES)
     state = convert_to_kociemba(cube)
 
 
-    alg = rubik_impl.norm_alg(kociemba.solve(SOLVED_STATE,state))
-    print(alg)
-    alg += rubik_impl.reverse_alg(random_moves)
-    return " ".join(alg)
+    output_alg = rubik_impl.Alg(kociemba.solve(SOLVED_STATE,state))
+    output_alg += scramble_alg.reverse()
+    return output_alg
+
+print(get("R U"))
 

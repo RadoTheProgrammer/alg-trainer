@@ -8,11 +8,11 @@ FILE_TIMES = "data-times.csv"
 def train(category,cases=()):
     df = pd.read_csv(FILE_ALGS)
     #print(df["Case"] in cases)
-    df = df[(df["Category"]==category) & (df["Case"].isin(cases))]
+    df = df[(df["Category"]==category) & (df["Case"].isin(cases) if cases else True) & df["Selected"]]
     alg = df.loc[0,"Alg"]
 
 
-
+    print(df)
     input("Tell when ready")
     print(setup_alg.get(alg))
     wait_until_press() # user applying setup alg
@@ -38,6 +38,6 @@ key_pressed = False
 keyboard.on_press(on_press)
 keyboard.on_release(on_release)
 
-train("PLL",("Ua perm",))
+train("PLL")
 
 input()
