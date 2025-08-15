@@ -17,7 +17,7 @@ def convert_to_kociemba(cube):
 
 def get(input_alg):
     reversed_alg = rubik_impl.Alg(input_alg).reverse()
-    print(reversed_alg)
+
     cube = rubik_impl.Cube.solved()
     cube.apply(reversed_alg)
     scramble_alg = cube.scramble(N_RANDOM_MOVES)
@@ -28,5 +28,5 @@ def get(input_alg):
     output_alg += scramble_alg.reverse()
     return output_alg
 
-print(get("R U"))
+
 
